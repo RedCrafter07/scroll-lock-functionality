@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.title-bar {
+	-webkit-app-region: drag;
+}
+
+.title-bar-bg {
+	@apply w-full absolute grid place-items-center h-4 title-bar bg-black bg-opacity-25;
+}
