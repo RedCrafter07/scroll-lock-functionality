@@ -30,7 +30,7 @@ const createWindow = (): void => {
 			x: mainScreen.workAreaSize.width - winWidth - 20,
 			y: mainScreen.workAreaSize.height - winHeight - 20,
 			vibrancy: {
-				theme: '#22222222',
+				theme: '#22222211',
 				effect: 'acrylic',
 				disableOnBlur: true,
 			},
