@@ -114,14 +114,16 @@ async function getData() {
 		})
 	);
 
-	const data = res1.map((v: any, i: number) => {
-		return {
+	const data = res1
+		.map((v: any, i: number) => ({
 			login: v.user_login,
 			name: v.user_name,
 			id: v.user_id,
 			profilePicture: profilePictures[i],
-		};
-	});
+		}))
+		.sort((a: any, b: any) => {
+			return a.login - b.login;
+		});
 
 	return data;
 }
