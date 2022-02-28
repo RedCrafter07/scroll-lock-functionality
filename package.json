@@ -1,8 +1,8 @@
 {
-	"name": "context-menu-key",
-	"productName": "context-menu-key",
+	"name": "scroll-lock-functionality",
+	"productName": "scroll-lock-functionality",
 	"version": "1.0.0",
-	"description": "My Electron application description",
+	"description": "Brings a functionality to the Scroll Lock Key!",
 	"main": ".webpack/main",
 	"scripts": {
 		"start": "electron-forge start",
@@ -24,14 +24,15 @@
 				{
 					"name": "@electron-forge/maker-squirrel",
 					"config": {
-						"name": "context_menu_key"
+						"name": "scroll_lock_functionality",
+						"loadingGif": "./loading.gif",
+						"iconUrl": "D:\\coding\\context-menu-key\\src\\icon.png",
+						"setupIcon": "./src/icon.png"
 					}
 				},
 				{
 					"name": "@electron-forge/maker-zip",
-					"platforms": [
-						"darwin"
-					]
+					"platforms": [ "darwin" ]
 				},
 				{
 					"name": "@electron-forge/maker-deb",
