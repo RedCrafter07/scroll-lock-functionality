@@ -2,6 +2,8 @@ import { useState } from 'react';
 import moment from 'moment';
 import axios from 'axios';
 import { id, token } from './env';
+import config from './config.json';
+import { CogIcon } from '@heroicons/react/outline';
 
 let render = 0;
 
@@ -37,37 +39,52 @@ const AppContent = () => {
 		<div>
 			<h1 className='text-5xl'>{time}</h1>
 			<p className='text-2xl'>{date}</p>
-			<hr className='my-12 opacity-50' />
-			<p className='text-2xl'>Live Streams</p>
-			<p className='text-xl'>
-				Below you can see the live status from the people you follow.
-			</p>
 
-			<div className='my-6' />
+			{config.live.enabled === true ? (
+				<div>
+					<hr className='my-12 opacity-50' />
+					<p className='text-2xl'>Live Streams</p>
+					<p className='text-xl'>
+						Below you can see the live status from the people you follow.
+					</p>
 
-			<div className='grid gap-4 grid-cols-8'>
-				{live.length > 0 ? (
-					live.map((v, i) => {
-						return (
-							<div key={i}>
-								<a
-									href={`https://twitch.tv/${v.login}`}
-									target={'_blank'}
-									title={v.name}
-								>
-									<img
-										src={v.profilePicture}
-										className='rounded-full w-full h-full border-4 border-red-600'
-										alt={`${v.name}'s Profile Picture`}
-									/>
-								</a>
-							</div>
-						);
-					})
-				) : (
-					'No streamers live :/'
-				)}
-			</div>
+					<div className='my-6' />
+					<div className='grid gap-4 grid-cols-8'>
+						{live.length > 0 ? (
+							live.map((v, i) => {
+								return (
+									<div key={i}>
+										<a
+											href={`https://twitch.tv/${v.login}`}
+											target={'_blank'}
+											title={v.name}
+										>
+											<img
+												src={v.profilePicture}
+												className='rounded-full w-full h-full border-4 border-red-600'
+												alt={`${v.name}'s Profile Picture`}
+											/>
+										</a>
+									</div>
+								);
+							})
+						) : (
+							'No streamers live :/'
+						)}
+					</div>
+				</div>
+			) : null}
+		</div>
+	);
+};
+
+const GearIcon = () => {
+	return (
+		<div
+			className='absolute bottom-6 right-6'
+			title={`The settings aren't available for the time being.`}
+		>
+			<CogIcon className='w-6 h-6 opacity-50 text-white hover:opacity-100 transition-colors duration-200' />
 		</div>
 	);
 };
@@ -80,6 +97,7 @@ const App = () => {
 			</div>
 			<div className='h-full rounded-lg drop-shadow-2xl px-4 py-4 overflow-hidden'>
 				<AppContent />
+				<GearIcon />
 			</div>
 		</div>
 	);
@@ -107,6 +125,7 @@ async function fetchTw(endpoint: string) {
 } */
 
 async function getData() {
+	if (config.live.enabled === false) return;
 	const res1: any = await fetchLivestreams();
 	const profilePictures: any = await getProfilePictures(
 		res1.map((v: any) => {
@@ -139,7 +158,9 @@ async function getProfilePictures(logins: Array<string>) {
 }
 
 async function fetchLivestreams() {
-	const res = await fetchTw('/users/follows?from_id=464418863&first=100');
+	const res = await fetchTw(
+		`/users/follows?from_id=${config.live.twitch_id}&first=100`
+	);
 	const data: Array<{ to_id: string; to_login: string; to_name: string }> =
 		res.data;
 	const data2 = data.map(
