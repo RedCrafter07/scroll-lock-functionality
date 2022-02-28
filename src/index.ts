@@ -113,8 +113,6 @@ app.on('ready', async () => {
 	let path = __dirname.split('\\');
 	path = path.slice(0, path.length - 2);
 
-	console.log(`${path.join('\\')}\\src\\icon.png`);
-
 	const tray = new Tray(`${path.join('\\')}\\src\\icon.png`);
 
 	const contextMenu = Menu.buildFromTemplate([
