@@ -24,17 +24,12 @@
 				{
 					"name": "@electron-forge/maker-squirrel",
 					"config": {
-						"name": "scroll_lock_functionality",
-						"loadingGif": "./loading.gif",
-						"iconUrl": "D:\\coding\\context-menu-key\\src\\icon.png",
-						"setupIcon": "./src/icon.png"
+						"name": "scroll_lock_functionality"
 					}
 				},
 				{
 					"name": "@electron-forge/maker-zip",
-					"platforms": [
-						"darwin"
-					]
+					"platforms": [ "darwin" ]
 				},
 				{
 					"name": "@electron-forge/maker-deb",
