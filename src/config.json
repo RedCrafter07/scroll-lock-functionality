@@ -1,6 +1,6 @@
 {
 	"live": {
 		"twitch_id": "",
-		"enabled": true
+		"enabled": false
 	}
 }
