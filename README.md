@@ -1,5 +1,5 @@
 # scroll-lock-functionality
-A program which ads functionality to the scroll lock key.
+A program which adds functionality to the scroll lock key.
 
 ## Info
 This program is currently in the beta phase but I'm working on it to make it available to you as soon as possible :) 
